@@ -1,8 +1,7 @@
-import 'dart:collection';
-
+import 'package:flutter/material.dart';
 import 'package:shortly/Models/link.dart';
 
-class LinkHistoryService {
+class LinkHistoryService extends ChangeNotifier {
   final List<Link> links = [];
 
   static final LinkHistoryService _service = LinkHistoryService._internal();
@@ -22,6 +21,7 @@ class LinkHistoryService {
     else{
       throw Exception("Link already exist!");
     }
+    notifyListeners();
   }
 
   get(int index){
@@ -35,10 +35,12 @@ class LinkHistoryService {
 
   removeLink(Link link){
     links.remove(link);
+    notifyListeners();
   }
 
   removeAtLink(int index){
     links.removeAt(index);
+    notifyListeners();
   }
 
   getSize(){

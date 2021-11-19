@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shortly/services/link_history_service.dart';
+import 'package:shortly/ui/screens/history_screen.dart';
 import 'package:shortly/ui/screens/main_screen.dart';
 
 void main() {
@@ -11,7 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MainWidget(), debugShowCheckedModeBanner: false);
+    return ChangeNotifierProvider<LinkHistoryService>(
+      create: (context) => LinkHistoryService(),
+      child: MaterialApp(
+          home: MainWidget(),
+          routes: {'HistoryScreen': (BuildContext context) => HistoryScreen()},
+          debugShowCheckedModeBanner: false),
+    );
   }
 }
 
