@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shortly/Models/link.dart';
+import 'package:shortly/services/link_history_service.dart';
+import 'package:shortly/utils/link_generator.dart';
 
 class ControlPanel extends StatefulWidget {
   ControlPanel({Key? key}) : super(key: key);
@@ -12,11 +15,14 @@ class ControlPanel extends StatefulWidget {
 }
 
 class _ControlPanelState extends State<ControlPanel> {
+  var service = LinkHistoryService();
 
+  var linkGenerator = LinkGenerator();
+
+  var txtController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         Container(
@@ -39,8 +45,11 @@ class _ControlPanelState extends State<ControlPanel> {
               children: [
                 TextField(
                   textAlign: TextAlign.center,
+                  controller: txtController,
                   style: TextStyle(
-                      color: Colors.black, fontSize: 24, fontWeight: FontWeight.w400),
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
@@ -48,13 +57,26 @@ class _ControlPanelState extends State<ControlPanel> {
                       filled: true,
                       fillColor: Colors.white,
                       hintText: "Shorten a link here...",
-
                       hintStyle: TextStyle(
-                          color: Colors.black38, fontSize: 24, fontWeight: FontWeight.w800)),
+                          color: Colors.black38,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800)),
                 ),
                 SizedBox(height: 15),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      var url = txtController.text;
+                      var shortLink = linkGenerator.generateShortLink();
+                      var link = Link.withParams(url, shortLink);
+
+                      service.addLink(link);
+
+                      if (ModalRoute.of(context)!.settings.name !=
+                          "HistoryScreen") {
+                        Navigator.of(context).pushNamed("HistoryScreen");
+                      }
+                      txtController.clear();
+                      },
                     style: TextButton.styleFrom(
                       backgroundColor: Color.fromRGBO(42, 207, 207, 1),
                       minimumSize: Size(double.infinity, 55),
