@@ -25,4 +25,17 @@ class Link {
 
   }
 
+  // Used for link-obj comparison and the LinkHistoryService use this
+  @override
+  bool operator ==(Object other) {
+    if(other is! Link) {
+      return false;
+    }
+    if(other.url != this.url || other.shortLink != this.shortLink) {
+      return false;
+    }
+
+    return true;
+  }
+
 }
