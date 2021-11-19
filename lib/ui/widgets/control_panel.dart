@@ -21,6 +21,8 @@ class _ControlPanelState extends State<ControlPanel> {
 
   var txtController = TextEditingController();
 
+  var isEmptySubmit = false;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -47,18 +49,24 @@ class _ControlPanelState extends State<ControlPanel> {
                   textAlign: TextAlign.center,
                   controller: txtController,
                   style: TextStyle(
-                      color: Colors.black,
+                      color: isEmptySubmit ? Colors.red : Colors.black,
                       fontSize: 24,
                       fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: isEmptySubmit ? Colors.red : Colors.blue),
+                      ),
                       filled: true,
                       fillColor: Colors.white,
-                      hintText: "Shorten a link here...",
+                      hintText: isEmptySubmit
+                          ? "Please add a link here!"
+                          : "Shorten a link here...",
                       hintStyle: TextStyle(
-                          color: Colors.black38,
+                          color: isEmptySubmit ? Colors.red : Colors.black38,
                           fontSize: 24,
                           fontWeight: FontWeight.w800)),
                 ),
@@ -66,17 +74,28 @@ class _ControlPanelState extends State<ControlPanel> {
                 TextButton(
                     onPressed: () {
                       var url = txtController.text;
-                      var shortLink = linkGenerator.generateShortLink();
-                      var link = Link.withParams(url, shortLink);
-
-                      service.addLink(link);
-
-                      if (ModalRoute.of(context)!.settings.name !=
-                          "HistoryScreen") {
-                        Navigator.of(context).pushNamed("HistoryScreen");
+                      if (url.isEmpty) {
+                        setState(() {
+                          isEmptySubmit = true;
+                        });
                       }
-                      txtController.clear();
-                      },
+                      if (Uri.parse(url).isAbsolute) {
+                        var shortLink = linkGenerator.generateShortLink();
+                        var link = Link.withParams(url, shortLink);
+
+                        service.addLink(link);
+
+                        if (ModalRoute.of(context)!.settings.name !=
+                            "HistoryScreen") {
+                          Navigator.of(context).pushNamed("HistoryScreen");
+                          txtController.clear();
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Please enter a valid address"),
+                        ));
+                      }
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Color.fromRGBO(42, 207, 207, 1),
                       minimumSize: Size(double.infinity, 55),
