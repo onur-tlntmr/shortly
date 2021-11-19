@@ -33,7 +33,7 @@ class LinkGenerator {
   }
 
   //Generates a random string of length 6
-  createSuffix() {
+  _createSuffix() {
     var buffer = StringBuffer();
 
     int bound = _characters.length;
@@ -52,6 +52,6 @@ class LinkGenerator {
   }
 
   generateShortLink() {
-    return _prefix + createSuffix();
+    return _prefix + _createSuffix();
   }
 }

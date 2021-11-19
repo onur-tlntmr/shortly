@@ -7,7 +7,6 @@ import 'package:shortly/ui/widgets/control_panel.dart';
 class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final LinkHistoryService service = context.watch<LinkHistoryService>();
 
     var txtStyle = TextStyle(
         fontFamily: "RobotoMono",
@@ -16,7 +15,6 @@ class HistoryScreen extends StatelessWidget {
 
     var backColor = Color.fromRGBO(240, 241, 246, 1.0);
 
-    // TODO: implement build
     return Scaffold(
       body: Column(
         children: [
@@ -43,7 +41,7 @@ class HistoryScreen extends StatelessWidget {
                   color: backColor,
                   // color: Colors.red,
                 )),
-            Consumer<LinkHistoryService>(
+            Consumer<LinkHistoryService>( //getting provider obj.
               builder: (context, service, child) => ListView.builder(
                 itemCount: service.getSize(),
                 itemBuilder: (BuildContext context, int index) {

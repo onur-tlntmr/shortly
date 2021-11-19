@@ -9,18 +9,21 @@ class ControlPanel extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _ControlPanelState();
   }
 }
 
 class _ControlPanelState extends State<ControlPanel> {
+  //for link save
   var service = LinkHistoryService();
 
+  //for link generate
   var linkGenerator = LinkGenerator();
 
+  //for url validation
   var txtController = TextEditingController();
 
+  //if url is not entered and was submit form
   var isEmptySubmit = false;
 
   @override
@@ -49,6 +52,7 @@ class _ControlPanelState extends State<ControlPanel> {
                   textAlign: TextAlign.center,
                   controller: txtController,
                   style: TextStyle(
+                    //for error colors
                       color: isEmptySubmit ? Colors.red : Colors.black,
                       fontSize: 24,
                       fontWeight: FontWeight.w400),
@@ -58,6 +62,7 @@ class _ControlPanelState extends State<ControlPanel> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
+                            //for error borders
                             color: isEmptySubmit ? Colors.red : Colors.blue),
                       ),
                       filled: true,
@@ -74,23 +79,27 @@ class _ControlPanelState extends State<ControlPanel> {
                 TextButton(
                     onPressed: () {
                       var url = txtController.text;
-                      if (url.isEmpty) {
-                        setState(() {
+                      if (url.isEmpty) { //if empty
+                        setState(() {//updated state
                           isEmptySubmit = true;
                         });
                       }
-                      if (Uri.parse(url).isAbsolute) {
+                      if (Uri.parse(url).isAbsolute) { //if valid url
+                        //create link
                         var shortLink = linkGenerator.generateShortLink();
                         var link = Link.withParams(url, shortLink);
 
+                        //add fake service
                         service.addLink(link);
 
+                        //if wasn't open history screen
                         if (ModalRoute.of(context)!.settings.name !=
                             "HistoryScreen") {
+                          //Go to History Screen
                           Navigator.of(context).pushNamed("HistoryScreen");
                           txtController.clear();
                         }
-                      } else {
+                      } else { //if not valid show message
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text("Please enter a valid address"),
                         ));

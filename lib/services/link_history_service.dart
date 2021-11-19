@@ -8,7 +8,7 @@ class LinkHistoryService extends ChangeNotifier {
 
   LinkHistoryService._internal();
 
-  factory LinkHistoryService(){
+  factory LinkHistoryService(){ //this is singleton obj
     return _service;
   }
 
@@ -21,7 +21,7 @@ class LinkHistoryService extends ChangeNotifier {
     else{
       throw Exception("Link already exist!");
     }
-    notifyListeners();
+    notifyListeners(); //for notify changes
   }
 
   get(int index){
@@ -35,12 +35,12 @@ class LinkHistoryService extends ChangeNotifier {
 
   removeLink(Link link){
     links.remove(link);
-    notifyListeners();
+    notifyListeners();//for notify changes
   }
 
   removeAtLink(int index){
     links.removeAt(index);
-    notifyListeners();
+    notifyListeners();//for notify changes
   }
 
   getSize(){

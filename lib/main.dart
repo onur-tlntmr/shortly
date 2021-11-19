@@ -14,12 +14,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    //Providers has been added for observable the data
     return ChangeNotifierProvider<LinkHistoryService>(
       create: (context) => LinkHistoryService(),
       child: MaterialApp(
           home: MainWidget(),
+          //for easy navigation
           routes: {'HistoryScreen': (BuildContext context) => HistoryScreen()},
+
+          //hiding debug banner
           debugShowCheckedModeBanner: false),
+
     );
   }
 }
