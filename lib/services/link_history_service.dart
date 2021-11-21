@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shortly/Models/link.dart';
+import 'package:shortly/utils/link_generator.dart';
 
 class LinkHistoryService extends ChangeNotifier {
   final List<Link> links = [];
@@ -8,44 +9,43 @@ class LinkHistoryService extends ChangeNotifier {
 
   LinkHistoryService._internal();
 
-  factory LinkHistoryService(){ //this is singleton obj
+  factory LinkHistoryService() {
+    //this is singleton obj
     return _service;
   }
 
+  addLink(String url) {
+    var shortLink = LinkGenerator().generateShortLink();
 
-  addLink(Link link){
+    Link link = Link.withParams(url, shortLink);
 
-    if(!links.contains(link)){
+    if (!links.contains(link)) {
       links.add(link);
-    }
-    else{
+    } else {
       throw Exception("Link already exist!");
     }
     notifyListeners(); //for notify changes
   }
 
-  get(int index){
+  get(int index) {
     return links[index];
   }
 
-  getAll(){
+  getAll() {
     return links;
   }
 
-
-  removeLink(Link link){
+  removeLink(Link link) {
     links.remove(link);
-    notifyListeners();//for notify changes
+    notifyListeners(); //for notify changes
   }
 
-  removeAtLink(int index){
+  removeAtLink(int index) {
     links.removeAt(index);
-    notifyListeners();//for notify changes
+    notifyListeners(); //for notify changes
   }
 
-  getSize(){
+  getSize() {
     return links.length;
   }
-
-
 }

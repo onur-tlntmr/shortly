@@ -1,13 +1,11 @@
 class Link {
-  late String _url, _shortLink;
+  late String url, shortLink;
 
   Link();
 
-  Link.withParams(this._url,this._shortLink);
+  Link.withUrl(this.url);
 
-
-  String get url => _url;
-  String get shortLink => _shortLink;
+  Link.withParams(this.url, this.shortLink);
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
@@ -18,24 +16,21 @@ class Link {
     return map;
   }
 
-
-  Link.fromObject(dynamic o){
-    _url = o["url"];
-    _shortLink = o["shortLink"];
-
+  Link.fromObject(dynamic o) {
+    url = o["url"];
+    shortLink = o["shortLink"];
   }
 
   // Used for link-obj comparison and the LinkHistoryService use this
   @override
   bool operator ==(Object other) {
-    if(other is! Link) {
+    if (other is! Link) {
       return false;
     }
-    if(other.url != this.url || other.shortLink != this.shortLink) {
+    if (other.url != url || other.shortLink != shortLink) {
       return false;
     }
 
     return true;
   }
-
 }
