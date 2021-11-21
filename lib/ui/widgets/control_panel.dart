@@ -122,4 +122,12 @@ class _ControlPanelState extends State<ControlPanel> {
       ],
     );
   }
+
+  //controller disposed when widget is removed
+  @override
+  void dispose() {
+    txtController.dispose(); //
+    super.dispose();
+  }
+
 }
