@@ -7,7 +7,8 @@ class CustomCard extends StatefulWidget {
   final Link link;
   final Function removeAction;
 
-  CustomCard(this.link, this.removeAction);
+  // ignore: use_key_in_widget_constructors
+  const CustomCard(this.link, this.removeAction);
 
   @override
   State<StatefulWidget> createState() {
@@ -20,9 +21,9 @@ class CustomCardState extends State<CustomCard> {
   var isClick = false;
 
   //for button style change
-  var beforeColor = Color.fromRGBO(42, 207, 207, 1);
+  static const beforeColor =  Color.fromRGBO(42, 207, 207, 1);
 
-  var afterColor = Color.fromRGBO(59, 48, 84, 1);
+  static const afterColor = Color.fromRGBO(59, 48, 84, 1);
 
   var beforeText = "Copy";
   var afterText = "Copied!";
@@ -32,7 +33,7 @@ class CustomCardState extends State<CustomCard> {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.0)),
         child: Padding(
-          padding: EdgeInsets.all(17),
+          padding: const EdgeInsets.all(17),
           child: Column(
             children: [
               Row(
@@ -40,7 +41,7 @@ class CustomCardState extends State<CustomCard> {
                   Expanded(
                     child: Text(
                       widget.link.url,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: "RobotoMono",
                           overflow: TextOverflow.ellipsis,
                           fontSize: 26,
@@ -55,19 +56,19 @@ class CustomCardState extends State<CustomCard> {
                       icon: SvgPicture.asset("assets/images/del.svg"))
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(widget.link.shortLink,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: "RobotoMono",
                         fontSize: 24,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(42, 207, 207, 1))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextButton(
@@ -75,21 +76,21 @@ class CustomCardState extends State<CustomCard> {
                   //clipboard copy
                   Clipboard.setData(ClipboardData(text: widget.link.shortLink));
                   setState(() {
-                    this.isClick = !isClick; //flag triggered
+                    isClick = !isClick; //flag triggered
                   });
                 },
                 child: Text(
                   isClick ? afterText : beforeText,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 32,
                       color: Colors.white,
                       fontWeight: FontWeight.w800),
                 ),
                 style: TextButton.styleFrom(
                   backgroundColor: isClick ? afterColor : beforeColor,
-                  minimumSize: Size(double.infinity, 55),
-                  padding: EdgeInsets.symmetric(horizontal: 80),
-                  shape: RoundedRectangleBorder(
+                  minimumSize: const Size(double.infinity, 55),
+                  padding: const EdgeInsets.symmetric(horizontal: 80),
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                 ),

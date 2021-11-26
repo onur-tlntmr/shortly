@@ -5,15 +5,17 @@ import 'package:shortly/ui/widgets/card.dart';
 import 'package:shortly/ui/widgets/control_panel.dart';
 
 class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
 
-    var txtStyle = TextStyle(
+    const txtStyle = TextStyle(
         fontFamily: "RobotoMono",
         fontSize: 24,
         color: Color.fromRGBO(53, 50, 62, 1));
 
-    var backColor = Color.fromRGBO(240, 241, 246, 1.0);
+    const backColor = Color.fromRGBO(240, 241, 246, 1.0);
 
     return Scaffold(
       body: Column(
@@ -22,7 +24,7 @@ class HistoryScreen extends StatelessWidget {
             width: double.infinity,
             child: Container(
               color: backColor,
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
                 child: Text(
                   "Your Link History",
@@ -51,7 +53,7 @@ class HistoryScreen extends StatelessWidget {
               ),
             ),
           ])),
-          ControlPanel()
+          const ControlPanel()
         ],
       ),
     );

@@ -5,11 +5,11 @@ import 'package:shortly/ui/screens/history_screen.dart';
 import 'package:shortly/ui/screens/main_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<LinkHistoryService>(
       create: (context) => LinkHistoryService(),
       child: MaterialApp(
-          home: MainWidget(),
+          home: const MainWidget(),
           //for easy navigation
           routes: {'HistoryScreen': (BuildContext context) => HistoryScreen()},
 
@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MainWidget extends StatelessWidget {
-  MainWidget({Key? key}) : super(key: key);
+  const MainWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: MainScreen(),
     );
   }

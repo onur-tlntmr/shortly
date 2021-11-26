@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shortly/ui/widgets/control_panel.dart';
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -19,20 +21,20 @@ class MainScreen extends StatelessWidget {
               "assets/images/illustration.svg",
               fit: BoxFit.scaleDown,
             ),
-            Text("Let's get started!",
+            const Text("Let's get started!",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontFamily: "RobotoMono",
                     fontSize: 30,
                     fontWeight: FontWeight.w900,
                     color: Colors.deepPurple)),
-            Text("Past your first link into\nthe field to shoten it",
+            const Text("Past your first link into\nthe field to shoten it",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontFamily: "RobotoMono",
                     fontSize: 20, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
-      ControlPanel(),
+      const ControlPanel(),
     ]);
   }
 }

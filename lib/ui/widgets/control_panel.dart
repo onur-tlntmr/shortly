@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shortly/services/link_history_service.dart';
 
 class ControlPanel extends StatefulWidget {
-  ControlPanel({Key? key}) : super(key: key);
+  const ControlPanel({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -28,17 +28,17 @@ class _ControlPanelState extends State<ControlPanel> {
         Container(
             width: double.infinity,
             height: 180,
-            color: Color.fromRGBO(59, 48, 84, 1.0)),
+            color: const Color.fromRGBO(59, 48, 84, 1.0)),
         Align(
           alignment: Alignment.topRight,
           child: SvgPicture.asset(
             "assets/images/shape.svg",
             fit: BoxFit.cover,
-            color: Color.fromRGBO(75, 63, 107, 1.0),
+            color: const Color.fromRGBO(75, 63, 107, 1.0),
           ),
         ),
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 45, vertical: 14),
+            margin: const EdgeInsets.symmetric(horizontal: 45, vertical: 14),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,7 +71,7 @@ class _ControlPanelState extends State<ControlPanel> {
                           fontSize: 24,
                           fontWeight: FontWeight.w800)),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 TextButton(
                     onPressed: () {
                       var url = txtController.text;
@@ -97,20 +97,20 @@ class _ControlPanelState extends State<ControlPanel> {
                         }
                       } else {
                         //if not valid show message
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Please enter a valid address"),
                         ));
                       }
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(42, 207, 207, 1),
-                      minimumSize: Size(double.infinity, 55),
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      shape: RoundedRectangleBorder(
+                      backgroundColor: const Color.fromRGBO(42, 207, 207, 1),
+                      minimumSize: const Size(double.infinity, 55),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Shorten It",
                       style: TextStyle(
                           fontSize: 30,
