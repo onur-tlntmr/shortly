@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           home: const MainWidget(),
           //for easy navigation
-          routes: {'HistoryScreen': (BuildContext context) => HistoryScreen()},
+          routes: {'HistoryScreen': (BuildContext context) => const HistoryScreen()},
 
           //hiding debug banner
           debugShowCheckedModeBanner: false),
