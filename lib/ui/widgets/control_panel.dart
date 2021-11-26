@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shortly/services/link_history_service.dart';
 
-
 class ControlPanel extends StatefulWidget {
   ControlPanel({Key? key}) : super(key: key);
 
@@ -54,8 +53,9 @@ class _ControlPanelState extends State<ControlPanel> {
                       fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: BorderSide(
+                              color: isEmptySubmit ? Colors.red : Colors.blue)),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             //for error borders
@@ -129,5 +129,4 @@ class _ControlPanelState extends State<ControlPanel> {
     txtController.dispose(); //
     super.dispose();
   }
-
 }
